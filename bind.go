@@ -361,7 +361,11 @@ func (b bind) bind(fs FlagSet, v interface{}) (err error) {
 		// short name.
 		if !tag.HasExplicitName ||
 			(usePFlag && tag.Name == tag.ShortName) {
-			tag.Name = FromCamelCase(structField.Name, Separator)
+			if b.NamePopulator == nil {
+				tag.Name = FromCamelCase(structField.Name, Separator)
+			} else {
+				tag.Name = b.NamePopulator(structField.Name)
+			}
 		}
 
 		fieldV := val.Field(i)
