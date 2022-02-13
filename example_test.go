@@ -26,7 +26,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/AdamSLevy/flagbind"
+	"github.com/iqoption/flagbind"
 	"github.com/spf13/pflag"
 )
 
