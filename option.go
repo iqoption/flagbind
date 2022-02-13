@@ -11,6 +11,7 @@ func newBind(opts ...Option) bind {
 type bind struct {
 	Prefix        string
 	NoAutoFlatten bool
+	NamePopulator func(fieldName string) string
 }
 
 func (b bind) Option() Option {
@@ -39,5 +40,11 @@ func Prefix(prefix string) Option {
 func NoAutoFlatten() Option {
 	return func(b *bind) {
 		b.NoAutoFlatten = true
+	}
+}
+
+func NamePopulator(fn func(fieldName string) string) Option {
+	return func(b *bind) {
+		b.NamePopulator = fn
 	}
 }
